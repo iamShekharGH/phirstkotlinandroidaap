@@ -8,6 +8,31 @@
     <fragment
         android:id="@+id/phirstFrag"
         android:name="com.iamshekhargh.ekappaisabhi.ui.PhirstFrag"
-        android:label="fragment_phirst"
-        tools:layout="@layout/fragment_phirst" />
+        android:label="Tasks"
+        tools:layout="@layout/fragment_phirst">
+        <action
+            android:id="@+id/action_phirstFrag_to_addEditTaskFragment"
+            app:destination="@id/addEditTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditTaskFragment"
+        android:name="com.iamshekhargh.ekappaisabhi.ui.addedittask.AddEditTaskFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_add_edit_task">
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.iamshekhargh.ekappaisabhi.models.Task"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteAllCompletedDialogFragment"
+        android:name="com.iamshekhargh.ekappaisabhi.ui.DeleteAllCompletedDialogFragment"
+        android:label="DeleteAllCompletedDialogFragment" />
+    <action
+        android:id="@+id/action_global_deleteAllCompletedDialogFragment"
+        app:destination="@id/deleteAllCompletedDialogFragment" />
 </navigation>

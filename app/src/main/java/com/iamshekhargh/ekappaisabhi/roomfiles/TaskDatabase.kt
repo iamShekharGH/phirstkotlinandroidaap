@@ -36,13 +36,12 @@ abstract class TaskDatabase : RoomDatabase() {
                         important = true
                     )
                 )
-                dao.insert(Task("make omelet", "with fresh eggs", important = true))
-                dao.insert(Task("have a life", "or dont", important = false))
-                dao.insert(Task("order pizza", "from dominos", important = true, completed = true))
-                dao.insert(Task("watch One Piece", "latest episode", important = true))
-                dao.insert(Task("watch Black clover", "uda vo hawa me", important = false))
+                dao.insert(Task("Watch Black clover", "uda vo hawa me", important = false))
+                dao.insert(Task("Make omelet", "with fresh eggs", important = true))
+                dao.insert(Task("Watch One Piece", "latest episode", important = true))
+                dao.insert(Task("Have a life", "or dont", important = false))
+                dao.insert(Task("Order pizza", "from dominos", important = true, completed = true))
             }
         }
     }
-
 }

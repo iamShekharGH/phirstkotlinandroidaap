@@ -14,7 +14,7 @@ import com.iamshekhargh.ekappaisabhi.models.Task
  * on 31 March 2021
  * at 5:20 PM.
  */
-class TasksRVAdapter :
+class TasksRVAdapter(val listener: OnItemClickListener) :
     ListAdapter<Task, TasksRVAdapter.TasksVH>(DiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksVH {
@@ -26,7 +26,28 @@ class TasksRVAdapter :
         holder.binde(getItem(position))
     }
 
-    class TasksVH(val b: ItemTaskBinding) : RecyclerView.ViewHolder(b.root) {
+    inner class TasksVH(val b: ItemTaskBinding) : RecyclerView.ViewHolder(b.root) {
+        init {
+            b.apply {
+                root.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        listener.onItemClicked(getItem(adapterPosition))
+                    }
+                }
+                itemCheckbox.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        listener.onCheckBoxClicked(getItem(adapterPosition), itemCheckbox.isChecked)
+                    }
+                }
+//                root.setOnClickListener(
+//                    if (adapterPosition != NO_POSITION) {
+//                        listener.onItemClicked(getItem(adapterPosition))
+//                    }
+//                )
+
+            }
+        }
+
         fun binde(t: Task) {
             b.apply {
                 itemCheckbox.isChecked = t.completed
@@ -36,6 +57,11 @@ class TasksRVAdapter :
                 itemImageviewImportant.isVisible = t.important
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(t: Task)
+        fun onCheckBoxClicked(t: Task, isChecked: Boolean)
     }
 
     class DiffUtilItemCallback : DiffUtil.ItemCallback<Task>() {
