@@ -2,7 +2,7 @@ package com.iamshekhargh.ekappaisabhi.roomfiles
 
 import androidx.room.*
 import com.iamshekhargh.ekappaisabhi.models.Task
-import com.iamshekhargh.ekappaisabhi.ui.SortOrder
+import com.iamshekhargh.ekappaisabhi.util.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -36,5 +36,8 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_table WHERE (completed != :hideCompleted OR completed = 0) AND name LIKE '%' || :q || '%' ORDER BY important DESC, created")
     fun getTasksSortedByDate(q: String, hideCompleted: Boolean): Flow<List<Task>>
+
+    @Query("DELETE FROM task_table WHERE completed = 1")
+    suspend fun deleteAllCompletedTask()
 
 }
